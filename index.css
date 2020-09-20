@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+h1, h2, h3, div, p, span, a, li {
+  font-family: 'Arvo', serif; }
+
+body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+
+.body-content {
+  max-width: var(--max-width);
+  position: relative;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+ul {
+  list-style-type: none; }
+
+a {
+  color: #0060B6;
+  text-decoration: none; }
+
+.cubes-containers {
+  position: fixed;
+  max-width: var(--max-width);
+  height: 100vh;
+  width: 100vw; }
+
+.cube-container {
+  height: 50vh;
+  display: flex; }
+  .cube-container.top {
+    justify-content: flex-end; }
+  .cube-container.bottom {
+    align-items: flex-end; }
+
+.cube {
+  transition: all 3s;
+  transform-style: preserve-3D;
+  transform: rotateX(-20deg) rotateY(-15deg);
+  height: 100px;
+  width: 300px; }
+  .cube .side {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: #efefef;
+    font-size: 140px;
+    height: 100px;
+    width: 300px;
+    text-align: center;
+    border: 3px solid black;
+    font-size: 5rem;
+    transition: 3s;
+    color: white; }
+    .cube .side.front {
+      background: rgba(255, 255, 255, 0.3); }
+    .cube .side.back {
+      background: rgba(255, 255, 255, 0.3); }
+    .cube .side.top {
+      background: rgba(255, 255, 255, 0.3); }
+    .cube .side.bottom {
+      background: rgba(255, 255, 255, 0.3); }
+    .cube .side.left {
+      background: rgba(255, 255, 255, 0.3);
+      width: 100px;
+      height: 100px; }
+    .cube .side.right {
+      background: rgba(255, 255, 255, 0.3);
+      height: 100px;
+      width: 100px;
+      height: 100px; }
+    .cube .side:hover {
+      background: #fad141; }
+  .cube#from {
+    margin-top: 100px;
+    right: 10vw; }
+    @media screen and (max-width: 500px) {
+      .cube#from {
+        right: 25px;
+        margin-top: 20px;
+        transform: 0; } }
+    .cube#from:hover {
+      transform: translateX(30px) rotateX(-20deg) rotateY(-15deg); }
+    .cube#from::before {
+      content: "We Turn";
+      position: absolute;
+      left: 50px;
+      top: 100px;
+      font-size: 3rem;
+      left: -232px;
+      top: 65px;
+      background: white; }
+      @media screen and (max-width: 500px) {
+        .cube#from::before {
+          display: none; } }
+  .cube#to {
+    margin-bottom: 100px;
+    left: 10vw;
+    margin-left: 50px; }
+    @media screen and (max-width: 500px) {
+      .cube#to {
+        left: 25px;
+        margin-bottom: 20px;
+        transform: 0; } }
+    .cube#to:hover {
+      transform: translateX(-30px) rotateX(-20deg) rotateY(-15deg); }
+    .cube#to::after {
+      background: white;
+      content: "Into";
+      position: absolute;
+      font-size: 3rem;
+      left: -22px;
+      top: -85px; }
+      @media screen and (max-width: 500px) {
+        .cube#to::after {
+          display: none; } }
+
+:root {
+  --purple: blueviolet;
+  --pink: #f725a0;
+  --light-pink: violet;
+  --yellow: #fad141;
+  --blue:    #0cb2c0;
+  --grey: #e8e6d9;
+  --black: #000;
+  --max-width: 1280px;
+  --nav-height: 60px;
+  --section-separator-height: 100px; }
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 75px;
+  background: transparent;
+  z-index: 1;
+  background-blend-mode: exclusion;
+  display: flex;
+  justify-content: center;
+  background: white;
+  height: var(--nav-height);
+  justify-content: end; }
+  nav ul {
+    display: flex;
+    align-items: center; }
+    @media screen and (max-width: 500px) {
+      nav ul {
+        padding: 0; } }
+    nav ul li {
+      font-size: 1.4rem;
+      padding: 0.3rem 1rem;
+      margin: 0 1rem;
+      color: white;
+      cursor: pointer;
+      color: var(--pink);
+      color: black;
+      position: relative;
+      transition: 0.3s; }
+      nav ul li::after {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        content: '';
+        z-index: -1;
+        left: -10px;
+        bottom: 25px;
+        transition: 0.3s;
+        border-top: 2px solid black;
+        border-left: 2px solid black; }
+      nav ul li:hover {
+        color: white; }
+        nav ul li:hover::after {
+          left: 0;
+          width: 100%;
+          height: 100%;
+          bottom: 0px;
+          background: var(--pink); }
+        nav ul li:hover:nth-child(1)::after {
+          background: var(--pink); }
+        nav ul li:hover:nth-child(2)::after {
+          background: var(--blue); }
+        nav ul li:hover:nth-child(3)::after {
+          background: var(--yellow); }
+
+.section {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  max-width: var(--max-width);
+  overflow-y: hidden; }
+  .section .sub-section {
+    height: 50vh;
+    width: 100%;
+    display: flex; }
+    .section .sub-section.bottom {
+      flex-direction: row-reverse; }
+    .section .sub-section .content {
+      width: 50%; }
+      .section .sub-section .content .text-container {
+        padding: 5rem; }
+  .section .bottom-section {
+    height: 50vh;
+    width: 100vw; }
+    .section .bottom-section .content {
+      width: 60vw; }
+
+.container-highlight-text {
+  width: 100%;
+  background: white;
+  border: 3px solid black;
+  padding: 1rem;
+  position: relative; }
+  .container-highlight-text::after {
+    background: var(--pink);
+    height: 100%;
+    width: 100%;
+    top: -60px;
+    left: -70px;
+    content: '';
+    position: absolute;
+    z-index: -1; }
+
+.section-separator {
+  width: 100vw;
+  height: var(--section-separator-height);
+  background: white;
+  background: var(--pink);
+  z-index: 20;
+  mix-blend-mode: hue; }
+
+.first .main-title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow-y: hidden; }
+  .first .main-title-container .title-letters {
+    font-size: 50vh;
+    font-size: 70vh;
+    line-height: 53vh; }
+    .first .main-title-container .title-letters.right {
+      text-align: right; }
+
+body {
+  background: white;
+  min-width: 100vw;
+  padding: 0;
+  margin: 0;
+  min-height: 100vw; }
