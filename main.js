@@ -1334,15 +1334,45 @@
 
     var lastScrollTop = 0;
     var scrollingAnimation = function (cubes) {
+        var boxShrinker = document.getElementById('box-shrinker');
         window.addEventListener('scroll', function (e) {
             var scrollingTop = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
             var scrollingUp = scrollingTop > lastScrollTop;
             cubesChanging(cubes);
             decomposition(cubes, scrollingUp);
             lastScrollTop = scrollingTop <= 0 ? 0 : scrollingTop;
+            for (var i = 0; i < cubes.length; i++) {
+                var cube = cubes[i];
+                if (fixedCross(cube, boxShrinker)) {
+                    var sides = cube.getElementsByClassName('side');
+                    for (var ii = 0; ii < sides.length; ii++) {
+                        var side = sides[ii];
+                        side.style.transition = 'all 0.2s';
+                        side.style.borderRadius = '25px';
+                        side.style.borderWidth = '1px';
+                        side.style.transition = '3s';
+                    }
+                }
+            }
         });
         // const observers
         // registerSectionsObservers(cubes)
+    };
+    var fixedCross = function (fixed, toCross) {
+        var fixed = fixed;
+        var fixed_position = fixed.getBoundingClientRect().top;
+        var fixed_height = fixed.offsetHeight;
+        var toCross_position = toCross.getBoundingClientRect().top;
+        // var toCross_height = toCross.offsetHeight;
+        if (fixed_position + fixed_height < toCross_position) {
+            return false;
+        }
+        else if (fixed_position + fixed_height > toCross_position) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     var decomposition = function (cubes, scrollingUp) {
         var toDecompose = offsetIsTopHalf();
@@ -1353,16 +1383,14 @@
             // const rollAnim = decomposeAnimation(cube, scrollingUp)
             if (percentageOffset < 15 || percentageOffset > 85)
                 percentageOffset = 0;
-            console.log(percentageOffset);
             rollAnim.seek(rollAnim.duration * (percentageOffset / 100));
         }
     };
     var getPercentageOffset = function () {
         var navBar = document.querySelector('nav');
-        var extraHeight = 60;
         var currentYPos = window.pageYOffset;
         var relativeOffset = currentYPos > window.innerHeight ? currentYPos - window.innerHeight : currentYPos;
-        return (relativeOffset + extraHeight) / window.innerHeight * 100;
+        return (relativeOffset) / window.innerHeight * 100;
     };
     var offsetIsTopHalf = function () {
         // let currentYPos = window.pageYOffset
@@ -1370,7 +1398,7 @@
         return getPercentageOffset() < 50;
     };
     var cubesChanging = function (cubes) {
-        var texts = [['Input', 'Output'], ['Art', 'Code']];
+        var texts = [['Idea', 'Product'], ['Input', 'Output'], ['Info', 'Tech'], ['Data', 'Action'], ['Art', 'Code']];
         for (var i = 0; i < cubes.length; i++) {
             var cube = cubes[i];
             var sections = document.getElementsByClassName('section');
@@ -1609,8 +1637,24 @@
         return o;
     }
 
+    var populateShapes = function () {
+        // Thank you to https://codepen.io/32kB/pen/rdYoGV
+        var html = '';
+        for (var i = 1; i <= 50; i++) {
+            html += '<div class="shape-container-' + i + ' shape-animation"><div class="random-shape"></div></div>';
+        }
+        // document.querySelector('.shape').innerHTML += html;
+        var shapeStripes = document.getElementsByClassName('shape-stripe');
+        for (var i_1 = 0; i_1 < shapeStripes.length; i_1++) {
+            var shapeStripe = shapeStripes[i_1];
+            shapeStripe.innerHTML += html;
+        }
+        // var $allShapes = $("[class*='shape-container--']");
+    };
+
     docReady(function () {
         setupCubes();
+        populateShapes();
     });
 
 })));
