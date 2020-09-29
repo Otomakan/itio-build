@@ -126,6 +126,7 @@ a {
   --light-pink: violet;
   --yellow: #fad141;
   --blue:    #0cb2c0;
+  --blue-green: #36acac;
   --grey: #e8e6d9;
   --black: #000;
   --max-width: 1280px;
@@ -201,405 +202,432 @@ nav {
   height: 100%;
   overflow-y: hidden;
   opacity: 0.7;
-  width: 50px; }
+  width: 30vw;
+  transition: 2s;
+  background: transparent;
+  background: radial-gradient(transparent, transparent); }
+  .shape-stripe .space-invader-container {
+    width: 100%;
+    /* display: flex; */
+    justify-content: center;
+    text-align: center; }
+    .shape-stripe .space-invader-container .space-invader {
+      width: 50px;
+      transform: translateY(-12vh); }
   .shape-stripe:nth-child(1) {
-    left: 3rem; }
+    left: 10vw; }
   .shape-stripe:nth-child(2) {
-    left: 50%; }
-  .shape-stripe:nth-child(3) {
-    right: 0; }
+    right: 10vw; }
+  .shape-stripe:hover {
+    background: radial-gradient(violet, transparent);
+    font-size: 17rem; }
+  .shape-stripe:after {
+    width: 0;
+    height: 0;
+    top: 20;
+    border-bottom: 400px solid white;
+    border-right: 200px solid transparent;
+    z-index: -1;
+    transform: rotateX(20);
+    width: 0;
+    height: 0;
+    top: 20;
+    border-bottom: 400px solid white;
+    border-right: 20vw solid transparent;
+    z-index: -1;
+    transition: 0.5s; }
 
 .random-shape:after {
   font-family: inherit; }
 
 @keyframes shape-1 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(107deg); }
+    transform: translate3d(0, 0, 0) rotate(256deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(467deg); } }
+    transform: translate3d(0, 0, 0) rotate(616deg); } }
 
 .shape-container-1 {
-  animation: shape-1 54s linear infinite; }
+  animation: shape-1 64s linear infinite; }
   .shape-container-1 .random-shape:after {
-    color: black;
-    font-size: 0.74rem;
+    color: var(--black);
+    font-size: 1.94rem;
     content: "I"; }
 
 @keyframes shape-2 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(311deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(671deg); } }
-
-.shape-container-2 {
-  animation: shape-2 65s linear infinite; }
-  .shape-container-2 .random-shape:after {
-    color: var(--pink);
-    font-size: 0.74rem;
-    content: "0"; }
-
-@keyframes shape-3 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(123deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(483deg); } }
-
-.shape-container-3 {
-  animation: shape-3 51s linear infinite; }
-  .shape-container-3 .random-shape:after {
-    color: var(--pink);
-    font-size: 2.14rem;
-    content: "I"; }
-
-@keyframes shape-4 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(13deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(373deg); } }
-
-.shape-container-4 {
-  animation: shape-4 67s linear infinite; }
-  .shape-container-4 .random-shape:after {
-    color: var(--black);
-    font-size: 2.14rem;
-    content: "0"; }
-
-@keyframes shape-5 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(234deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(594deg); } }
-
-.shape-container-5 {
-  animation: shape-5 41s linear infinite; }
-  .shape-container-5 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.54rem;
-    content: "0"; }
-
-@keyframes shape-6 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(312deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(672deg); } }
-
-.shape-container-6 {
-  animation: shape-6 57s linear infinite; }
-  .shape-container-6 .random-shape:after {
-    color: var(--pink);
-    font-size: 0.94rem;
-    content: "I"; }
-
-@keyframes shape-7 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(224deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(584deg); } }
-
-.shape-container-7 {
-  animation: shape-7 52s linear infinite; }
-  .shape-container-7 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.94rem;
-    content: "0"; }
-
-@keyframes shape-8 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(200deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(560deg); } }
-
-.shape-container-8 {
-  animation: shape-8 54s linear infinite; }
-  .shape-container-8 .random-shape:after {
-    color: var(--black);
-    font-size: 0.54rem;
-    content: "I"; }
-
-@keyframes shape-9 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(281deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(641deg); } }
-
-.shape-container-9 {
-  animation: shape-9 57s linear infinite; }
-  .shape-container-9 .random-shape:after {
-    color: black;
-    font-size: 1.34rem;
-    content: "0"; }
-
-@keyframes shape-10 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(279deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(639deg); } }
-
-.shape-container-10 {
-  animation: shape-10 63s linear infinite; }
-  .shape-container-10 .random-shape:after {
-    color: var(--purple);
-    font-size: 2.14rem;
-    content: "0"; }
-
-@keyframes shape-11 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(241deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(601deg); } }
-
-.shape-container-11 {
-  animation: shape-11 59s linear infinite; }
-  .shape-container-11 .random-shape:after {
-    color: var(--black);
-    font-size: 1.74rem;
-    content: "I"; }
-
-@keyframes shape-12 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(123deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(483deg); } }
-
-.shape-container-12 {
-  animation: shape-12 61s linear infinite; }
-  .shape-container-12 .random-shape:after {
-    color: black;
-    font-size: 0.74rem;
-    content: "I"; }
-
-@keyframes shape-13 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(165deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(525deg); } }
-
-.shape-container-13 {
-  animation: shape-13 54s linear infinite; }
-  .shape-container-13 .random-shape:after {
-    color: black;
-    font-size: 1.34rem;
-    content: "I"; }
-
-@keyframes shape-14 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(31deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(391deg); } }
-
-.shape-container-14 {
-  animation: shape-14 48s linear infinite; }
-  .shape-container-14 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.94rem;
-    content: "0"; }
-
-@keyframes shape-15 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(273deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(633deg); } }
-
-.shape-container-15 {
-  animation: shape-15 43s linear infinite; }
-  .shape-container-15 .random-shape:after {
-    color: black;
-    font-size: 1.94rem;
-    content: "0"; }
-
-@keyframes shape-16 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(1deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(361deg); } }
-
-.shape-container-16 {
-  animation: shape-16 70s linear infinite; }
-  .shape-container-16 .random-shape:after {
-    color: var(--pink);
-    font-size: 0.74rem;
-    content: "0"; }
-
-@keyframes shape-17 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(305deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(665deg); } }
-
-.shape-container-17 {
-  animation: shape-17 61s linear infinite; }
-  .shape-container-17 .random-shape:after {
-    color: var(--black);
-    font-size: 0.74rem;
-    content: "0"; }
-
-@keyframes shape-18 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(11deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(371deg); } }
-
-.shape-container-18 {
-  animation: shape-18 58s linear infinite; }
-  .shape-container-18 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.14rem;
-    content: "I"; }
-
-@keyframes shape-19 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(322deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(682deg); } }
-
-.shape-container-19 {
-  animation: shape-19 42s linear infinite; }
-  .shape-container-19 .random-shape:after {
-    color: var(--purple);
-    font-size: 0.54rem;
-    content: "0"; }
-
-@keyframes shape-20 {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(228deg); }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(588deg); } }
-
-.shape-container-20 {
-  animation: shape-20 69s linear infinite; }
-  .shape-container-20 .random-shape:after {
-    color: var(--black);
-    font-size: 1.34rem;
-    content: "I"; }
-
-@keyframes shape-21 {
   0% {
     transform: translate3d(0, 0, 0) rotate(290deg); }
   100% {
     transform: translate3d(0, 0, 0) rotate(650deg); } }
 
-.shape-container-21 {
-  animation: shape-21 51s linear infinite; }
-  .shape-container-21 .random-shape:after {
+.shape-container-2 {
+  animation: shape-2 57s linear infinite; }
+  .shape-container-2 .random-shape:after {
+    color: var(--pink);
+    font-size: 1.14rem;
+    content: "I"; }
+
+@keyframes shape-3 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(10deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(370deg); } }
+
+.shape-container-3 {
+  animation: shape-3 43s linear infinite; }
+  .shape-container-3 .random-shape:after {
+    color: var(--black);
+    font-size: 1.34rem;
+    content: "I"; }
+
+@keyframes shape-4 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(199deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(559deg); } }
+
+.shape-container-4 {
+  animation: shape-4 48s linear infinite; }
+  .shape-container-4 .random-shape:after {
+    color: var(--pink);
+    font-size: 1.54rem;
+    content: "I"; }
+
+@keyframes shape-5 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(66deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(426deg); } }
+
+.shape-container-5 {
+  animation: shape-5 59s linear infinite; }
+  .shape-container-5 .random-shape:after {
     color: black;
-    font-size: 0.34rem;
+    font-size: 1.54rem;
     content: "0"; }
 
-@keyframes shape-22 {
+@keyframes shape-6 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(98deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(458deg); } }
+
+.shape-container-6 {
+  animation: shape-6 54s linear infinite; }
+  .shape-container-6 .random-shape:after {
+    color: black;
+    font-size: 0.54rem;
+    content: "I"; }
+
+@keyframes shape-7 {
   0% {
     transform: translate3d(0, 0, 0) rotate(356deg); }
   100% {
     transform: translate3d(0, 0, 0) rotate(716deg); } }
 
-.shape-container-22 {
-  animation: shape-22 42s linear infinite; }
-  .shape-container-22 .random-shape:after {
+.shape-container-7 {
+  animation: shape-7 55s linear infinite; }
+  .shape-container-7 .random-shape:after {
     color: var(--purple);
     font-size: 0.94rem;
     content: "I"; }
 
+@keyframes shape-8 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(193deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(553deg); } }
+
+.shape-container-8 {
+  animation: shape-8 65s linear infinite; }
+  .shape-container-8 .random-shape:after {
+    color: black;
+    font-size: 2.14rem;
+    content: "0"; }
+
+@keyframes shape-9 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(177deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(537deg); } }
+
+.shape-container-9 {
+  animation: shape-9 68s linear infinite; }
+  .shape-container-9 .random-shape:after {
+    color: black;
+    font-size: 1.14rem;
+    content: "I"; }
+
+@keyframes shape-10 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(175deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(535deg); } }
+
+.shape-container-10 {
+  animation: shape-10 56s linear infinite; }
+  .shape-container-10 .random-shape:after {
+    color: black;
+    font-size: 0.74rem;
+    content: "0"; }
+
+@keyframes shape-11 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(138deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(498deg); } }
+
+.shape-container-11 {
+  animation: shape-11 70s linear infinite; }
+  .shape-container-11 .random-shape:after {
+    color: var(--purple);
+    font-size: 1.94rem;
+    content: "I"; }
+
+@keyframes shape-12 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(346deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(706deg); } }
+
+.shape-container-12 {
+  animation: shape-12 59s linear infinite; }
+  .shape-container-12 .random-shape:after {
+    color: black;
+    font-size: 1.94rem;
+    content: "0"; }
+
+@keyframes shape-13 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(157deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(517deg); } }
+
+.shape-container-13 {
+  animation: shape-13 60s linear infinite; }
+  .shape-container-13 .random-shape:after {
+    color: var(--purple);
+    font-size: 1.54rem;
+    content: "I"; }
+
+@keyframes shape-14 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(231deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(591deg); } }
+
+.shape-container-14 {
+  animation: shape-14 53s linear infinite; }
+  .shape-container-14 .random-shape:after {
+    color: black;
+    font-size: 0.34rem;
+    content: "I"; }
+
+@keyframes shape-15 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(69deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(429deg); } }
+
+.shape-container-15 {
+  animation: shape-15 46s linear infinite; }
+  .shape-container-15 .random-shape:after {
+    color: var(--purple);
+    font-size: 1.14rem;
+    content: "I"; }
+
+@keyframes shape-16 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(292deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(652deg); } }
+
+.shape-container-16 {
+  animation: shape-16 56s linear infinite; }
+  .shape-container-16 .random-shape:after {
+    color: black;
+    font-size: 0.34rem;
+    content: "0"; }
+
+@keyframes shape-17 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(42deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(402deg); } }
+
+.shape-container-17 {
+  animation: shape-17 48s linear infinite; }
+  .shape-container-17 .random-shape:after {
+    color: var(--purple);
+    font-size: 1.54rem;
+    content: "I"; }
+
+@keyframes shape-18 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(68deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(428deg); } }
+
+.shape-container-18 {
+  animation: shape-18 42s linear infinite; }
+  .shape-container-18 .random-shape:after {
+    color: var(--black);
+    font-size: 1.14rem;
+    content: "0"; }
+
+@keyframes shape-19 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(187deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(547deg); } }
+
+.shape-container-19 {
+  animation: shape-19 52s linear infinite; }
+  .shape-container-19 .random-shape:after {
+    color: black;
+    font-size: 1.14rem;
+    content: "0"; }
+
+@keyframes shape-20 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(295deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(655deg); } }
+
+.shape-container-20 {
+  animation: shape-20 46s linear infinite; }
+  .shape-container-20 .random-shape:after {
+    color: var(--pink);
+    font-size: 0.54rem;
+    content: "0"; }
+
+@keyframes shape-21 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(45deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(405deg); } }
+
+.shape-container-21 {
+  animation: shape-21 59s linear infinite; }
+  .shape-container-21 .random-shape:after {
+    color: var(--black);
+    font-size: 0.54rem;
+    content: "I"; }
+
+@keyframes shape-22 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(220deg); }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(580deg); } }
+
+.shape-container-22 {
+  animation: shape-22 63s linear infinite; }
+  .shape-container-22 .random-shape:after {
+    color: var(--pink);
+    font-size: 0.34rem;
+    content: "0"; }
+
 @keyframes shape-23 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(251deg); }
+    transform: translate3d(0, 0, 0) rotate(43deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(611deg); } }
+    transform: translate3d(0, 0, 0) rotate(403deg); } }
 
 .shape-container-23 {
-  animation: shape-23 69s linear infinite; }
+  animation: shape-23 45s linear infinite; }
   .shape-container-23 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.74rem;
-    content: "0"; }
+    color: var(--black);
+    font-size: 1.34rem;
+    content: "I"; }
 
 @keyframes shape-24 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(148deg); }
+    transform: translate3d(0, 0, 0) rotate(220deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(508deg); } }
+    transform: translate3d(0, 0, 0) rotate(580deg); } }
 
 .shape-container-24 {
-  animation: shape-24 43s linear infinite; }
+  animation: shape-24 52s linear infinite; }
   .shape-container-24 .random-shape:after {
-    color: black;
-    font-size: 2.14rem;
+    color: var(--pink);
+    font-size: 0.74rem;
     content: "0"; }
 
 @keyframes shape-25 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(124deg); }
+    transform: translate3d(0, 0, 0) rotate(157deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(484deg); } }
+    transform: translate3d(0, 0, 0) rotate(517deg); } }
 
 .shape-container-25 {
-  animation: shape-25 57s linear infinite; }
+  animation: shape-25 58s linear infinite; }
   .shape-container-25 .random-shape:after {
-    color: black;
-    font-size: 0.94rem;
-    content: "I"; }
+    color: var(--pink);
+    font-size: 0.54rem;
+    content: "0"; }
 
 @keyframes shape-26 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(359deg); }
+    transform: translate3d(0, 0, 0) rotate(307deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(719deg); } }
+    transform: translate3d(0, 0, 0) rotate(667deg); } }
 
 .shape-container-26 {
-  animation: shape-26 53s linear infinite; }
+  animation: shape-26 43s linear infinite; }
   .shape-container-26 .random-shape:after {
-    color: black;
-    font-size: 1.74rem;
+    color: var(--black);
+    font-size: 0.34rem;
     content: "0"; }
 
 @keyframes shape-27 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(96deg); }
+    transform: translate3d(0, 0, 0) rotate(5deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(456deg); } }
+    transform: translate3d(0, 0, 0) rotate(365deg); } }
 
 .shape-container-27 {
-  animation: shape-27 54s linear infinite; }
+  animation: shape-27 51s linear infinite; }
   .shape-container-27 .random-shape:after {
-    color: var(--purple);
-    font-size: 0.74rem;
-    content: "I"; }
+    color: black;
+    font-size: 0.54rem;
+    content: "0"; }
 
 @keyframes shape-28 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(70deg); }
+    transform: translate3d(0, 0, 0) rotate(354deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(430deg); } }
+    transform: translate3d(0, 0, 0) rotate(714deg); } }
 
 .shape-container-28 {
-  animation: shape-28 61s linear infinite; }
+  animation: shape-28 41s linear infinite; }
   .shape-container-28 .random-shape:after {
-    color: var(--pink);
-    font-size: 2.14rem;
-    content: "0"; }
+    color: var(--purple);
+    font-size: 0.54rem;
+    content: "I"; }
 
 @keyframes shape-29 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(301deg); }
+    transform: translate3d(0, 0, 0) rotate(128deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(661deg); } }
+    transform: translate3d(0, 0, 0) rotate(488deg); } }
 
 .shape-container-29 {
-  animation: shape-29 49s linear infinite; }
+  animation: shape-29 48s linear infinite; }
   .shape-container-29 .random-shape:after {
-    color: black;
-    font-size: 1.94rem;
-    content: "I"; }
+    color: var(--pink);
+    font-size: 0.94rem;
+    content: "0"; }
 
 @keyframes shape-30 {
   0% {
-    transform: translate3d(0, 0, 0) rotate(118deg); }
+    transform: translate3d(0, 0, 0) rotate(241deg); }
   100% {
-    transform: translate3d(0, 0, 0) rotate(478deg); } }
+    transform: translate3d(0, 0, 0) rotate(601deg); } }
 
 .shape-container-30 {
-  animation: shape-30 41s linear infinite; }
+  animation: shape-30 54s linear infinite; }
   .shape-container-30 .random-shape:after {
-    color: var(--purple);
-    font-size: 1.14rem;
+    color: black;
+    font-size: 0.74rem;
     content: "I"; }
 
 .section {
@@ -681,54 +709,123 @@ nav {
     transform: rotateX(0deg); }
     .container-highlight-title.triangle:hover:after {
       transform: rotateX(0deg); }
-  .container-highlight-title .container-highlight-text {
-    background: white;
-    border: 3px solid black;
-    padding: 1rem;
-    position: relative;
-    margin: 1rem;
-    margin: 5rem; }
-    @media screen and (max-width: 1000px) {
-      .container-highlight-title .container-highlight-text {
-        margin: 3rem; } }
-    @media screen and (max-width: 750px) {
-      .container-highlight-title .container-highlight-text {
-        margin: 1rem; } }
-    @media screen and (max-width: 510px) {
-      .container-highlight-title .container-highlight-text {
-        margin: 1rem; } }
-    .container-highlight-title .container-highlight-text::after {
-      background: var(--pink);
-      height: 100%;
-      width: 100%;
-      top: -60px;
-      left: -70px;
-      content: '';
-      position: absolute;
-      z-index: -1; }
-      @media screen and (max-width: 510px) {
-        .container-highlight-title .container-highlight-text::after {
-          top: -20px;
-          left: -30px; } }
-  .container-highlight-title .section-separator {
-    width: 100vw;
-    height: var(--section-separator-height);
-    background: white;
+
+.container-highlight-text {
+  background: white;
+  border: 3px solid black;
+  padding: 1rem;
+  position: relative;
+  margin: 1rem;
+  margin: 5rem; }
+  @media screen and (max-width: 1000px) {
+    .container-highlight-text {
+      margin: 3rem; } }
+  @media screen and (max-width: 750px) {
+    .container-highlight-text {
+      margin: 1rem; } }
+  @media screen and (max-width: 510px) {
+    .container-highlight-text {
+      margin: 1rem; } }
+  .container-highlight-text::after {
     background: var(--pink);
-    z-index: 20;
-    mix-blend-mode: hue; }
-  .container-highlight-title .first .main-title-container {
+    height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
-    overflow-y: hidden; }
-    .container-highlight-title .first .main-title-container .title-letters {
-      font-size: 50vh;
-      font-size: 70vh;
-      line-height: 53vh; }
-      .container-highlight-title .first .main-title-container .title-letters.right {
-        text-align: right; }
+    top: -60px;
+    left: -70px;
+    content: '';
+    position: absolute;
+    z-index: -1; }
+    @media screen and (max-width: 510px) {
+      .container-highlight-text::after {
+        top: -20px;
+        left: -30px; } }
+
+.section-separator {
+  width: 100vw;
+  height: var(--section-separator-height);
+  background: white;
+  background: var(--pink);
+  border-top: 4px solid var(--yellow);
+  z-index: 20;
+  mix-blend-mode: hue; }
+
+.first .main-title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow-y: hidden; }
+  .first .main-title-container .title-letters {
+    font-size: 50vh;
+    font-size: 70vh;
+    line-height: 53vh; }
+    .first .main-title-container .title-letters.right {
+      text-align: right; }
+
+.section.full {
+  max-width: 100vw; }
+
+.section.relative {
+  position: relative; }
+
+#background-canvas {
+  height: 100%;
+  width: 100%; }
+
+#lateral {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100vh;
+  margin: 0;
+  background: #abc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg) translateY(-100vh);
+  height: 100vw;
+  transform-origin: right top;
+  background: blue;
+  mix-blend-mode: hue; }
+  #lateral > div {
+    transform: rotate(90deg); }
+
+.randomShapesBackground {
+  width: 100vh;
+  background: white;
+  height: 80vw;
+  padding: 100px; }
+  .randomShapesBackground .group--offset-fill {
+    position: relative; }
+  .randomShapesBackground .shape--triangle {
+    width: 0;
+    height: 0;
+    border: 1rem solid transparent;
+    border-top: 0rem solid transparent;
+    border-bottom: 2rem solid #333; }
+    .randomShapesBackground .shape--triangle.shape--offset-fill {
+      position: absolute;
+      top: .5rem;
+      left: .75rem;
+      border-bottom-color: rgba(255, 0, 0, 0.3);
+      z-index: -1; }
+  .randomShapesBackground .shape--filled, .randomShapesBackground .zig, .randomShapesBackground .shape--zig, .randomShapesBackground .shape--zag {
+    background-color: #333; }
+  .randomShapesBackground .shape--circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%; }
+  .randomShapesBackground .shape--line, .randomShapesBackground .zig, .randomShapesBackground .shape--zig, .randomShapesBackground .shape--zag {
+    width: 3rem;
+    height: .25rem; }
+  .randomShapesBackground .zig, .randomShapesBackground .shape--zig, .randomShapesBackground .shape--zag {
+    width: 1.5rem;
+    display: inline-block;
+    margin-right: -0.83333rem; }
+  .randomShapesBackground .shape--zig {
+    transform: rotate(45deg); }
+  .randomShapesBackground .shape--zag {
+    transform: rotate(-45deg); }
 
 body {
   background: white;

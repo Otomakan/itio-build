@@ -1335,28 +1335,46 @@
     var lastScrollTop = 0;
     var scrollingAnimation = function (cubes) {
         var boxShrinker = document.getElementById('box-shrinker');
+        if (!boxShrinker)
+            return;
         window.addEventListener('scroll', function (e) {
             var scrollingTop = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
             var scrollingUp = scrollingTop > lastScrollTop;
             cubesChanging(cubes);
             decomposition(cubes, scrollingUp);
             lastScrollTop = scrollingTop <= 0 ? 0 : scrollingTop;
-            // for (let i=0; i<cubes.length;i++) {
-            //     const cube = cubes[i] as HTMLElement
-            //     if (fixedCross(cube,boxShrinker)){
-            //         const sides = cube.getElementsByClassName('side')
-            //         for (let ii = 0; ii < sides.length; ii++) {
-            //             const side = sides[ii] as HTMLElement
-            //             side.style.transition = 'all 0.2s'
-            //             side.style.borderRadius = '25px'
-            //             side.style.borderWidth = '1px'
-            //             side.style.transition = '3s'
-            //         }
-            //     }
-            // }
+            for (var i = 0; i < cubes.length; i++) {
+                var cube = cubes[i];
+                if (fixedCross(cube, boxShrinker)) {
+                    var sides = cube.getElementsByClassName('side');
+                    for (var ii = 0; ii < sides.length; ii++) {
+                        var side = sides[ii];
+                        side.style.transition = 'all 0.2s';
+                        side.style.borderRadius = '25px';
+                        side.style.borderWidth = '1px';
+                        side.style.transition = '3s';
+                    }
+                }
+            }
         });
         // const observers
         // registerSectionsObservers(cubes)
+    };
+    var fixedCross = function (fixed, toCross) {
+        var fixed = fixed;
+        var fixed_position = fixed.getBoundingClientRect().top;
+        var fixed_height = fixed.offsetHeight;
+        var toCross_position = toCross.getBoundingClientRect().top;
+        // var toCross_height = toCross.offsetHeight;
+        if (fixed_position + fixed_height < toCross_position) {
+            return false;
+        }
+        else if (fixed_position + fixed_height > toCross_position) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     var decomposition = function (cubes, scrollingUp) {
         var toDecompose = offsetIsTopHalf();
@@ -1382,7 +1400,7 @@
         return getPercentageOffset() < 50;
     };
     var cubesChanging = function (cubes) {
-        var texts = [['Idea', 'Product'], ['Input', 'Output'], ['Info', 'Tech'], ['Data', 'Action'], ['Art', 'Code']];
+        var texts = [['Idea', 'Product'], ['Input', 'Output'], ['Info', 'Tech'], ['Data', 'Action'], ['Art', 'Code'], ['Fake', 'News']];
         for (var i = 0; i < cubes.length; i++) {
             var cube = cubes[i];
             var sections = document.getElementsByClassName('section');
@@ -1621,8 +1639,304 @@
         return o;
     }
 
+    var populateShapes = function () {
+        // Thank you to https://codepen.io/32kB/pen/rdYoGV
+        var html = '';
+        for (var i = 1; i <= 50; i++) {
+            html += '<div class="shape-container-' + i + ' shape-animation"><div class="random-shape"></div></div>';
+        }
+        // document.querySelector('.shape').innerHTML += html;
+        var shapeStripes = document.getElementsByClassName('shape-stripe');
+        for (var i_1 = 0; i_1 < shapeStripes.length; i_1++) {
+            var shapeStripe = shapeStripes[i_1];
+            shapeStripe.innerHTML += html;
+        }
+    };
+
+    var createCanvas = function () {
+        var canvas = document.getElementById('background-canvas');
+        if (!canvas)
+            return;
+        var ctx = canvas.getContext('2d');
+        canvas.width = 500;
+        canvas.height = 500;
+        // const colors = ["#f0eff8","#fcc207","#f8891c","#3e89bb","#5f3b66","#f71f2c"]
+        //Creating the grid and designs
+        for (var i = 0; i < 10; i++) {
+            for (var j = 0; j < 10; j++) {
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#000";
+                ctx.rect(j * 50, i * 50, 50, 50);
+                var rectCol = colorsHex[Math.floor(Math.random() * 6)];
+                ctx.fillStyle = rectCol;
+                ctx.fill();
+                var circCol = colorsHex[Math.floor(Math.random() * 6)];
+                if (rectCol === circCol) {
+                    //Create the 9 dot pattern when circCol = rectCol
+                    for (var k = 0; k < 3; k++) {
+                        for (var m = 0; m < 3; m++) {
+                            ctx.beginPath();
+                            ctx.arc(j * 50 + m * (15) + 10, i * 50 + 15 * (k) + 10, 5, 0, 2 * Math.PI);
+                            var dotCol = colorsHex[Math.floor(Math.random() * 6)];
+                            if (dotCol !== rectCol) {
+                                ctx.fillStyle = dotCol;
+                                ctx.fill();
+                            }
+                        }
+                    }
+                }
+                else {
+                    //if no dot pattern, then make a circle in that box
+                    ctx.beginPath();
+                    ctx.arc(j * 50 + 25, i * 50 + 25, 20, 0, 2 * Math.PI);
+                    ctx.fillStyle = circCol;
+                    ctx.fill();
+                    if (Math.floor(Math.random()) === 0) {
+                        //Choose a random square from the circle containing rectangle and make a triangle over it(to the lower right) with varying opacities
+                        ctx.beginPath();
+                        ctx.moveTo(j * 50, i * 50);
+                        ctx.lineTo(j * 50, i * 50 + 50);
+                        ctx.lineTo(j * 50 + 50, i * 50);
+                        var triCol = colorsHex[Math.floor(Math.random() * 6)];
+                        if (triCol !== rectCol && triCol !== circCol) {
+                            ctx.fillStyle = triCol;
+                            ctx.fillOpacity = Math.random() * 0.3;
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    // Thanks to https://gist.github.com/banksean/304522
+    // Ported from Stefan Gustavson's java implementation
+    // http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
+    // Read Stefan's excellent paper for details on how this code works.
+    //
+    // Sean McCullough banksean@gmail.com
+    /**
+     * You can pass in a random number generator object if you like.
+     * It is assumed to have a random() method.
+     */
+    var ClassicalNoise = function (r) {
+        if (r == undefined)
+            r = Math;
+        this.grad3 = [[1, 1, 0], [-1, 1, 0], [1, -1, 0], [-1, -1, 0],
+            [1, 0, 1], [-1, 0, 1], [1, 0, -1], [-1, 0, -1],
+            [0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]];
+        this.p = [];
+        for (var i = 0; i < 256; i++) {
+            this.p[i] = Math.floor(r.random() * 256);
+        }
+        // To remove the need for index wrapping, double the permutation table length 
+        this.perm = [];
+        for (var i = 0; i < 512; i++) {
+            this.perm[i] = this.p[i & 255];
+        }
+    };
+    ClassicalNoise.prototype.dot = function (g, x, y, z) {
+        return g[0] * x + g[1] * y + g[2] * z;
+    };
+    ClassicalNoise.prototype.mix = function (a, b, t) {
+        return (1.0 - t) * a + t * b;
+    };
+    ClassicalNoise.prototype.fade = function (t) {
+        return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+    };
+    // Classic Perlin noise, 3D version 
+    ClassicalNoise.prototype.noise = function (x, y, z) {
+        // Find unit grid cell containing point 
+        var X = Math.floor(x);
+        var Y = Math.floor(y);
+        var Z = Math.floor(z);
+        // Get relative xyz coordinates of point within that cell 
+        x = x - X;
+        y = y - Y;
+        z = z - Z;
+        // Wrap the integer cells at 255 (smaller integer period can be introduced here) 
+        X = X & 255;
+        Y = Y & 255;
+        Z = Z & 255;
+        // Calculate a set of eight hashed gradient indices 
+        var gi000 = this.perm[X + this.perm[Y + this.perm[Z]]] % 12;
+        var gi001 = this.perm[X + this.perm[Y + this.perm[Z + 1]]] % 12;
+        var gi010 = this.perm[X + this.perm[Y + 1 + this.perm[Z]]] % 12;
+        var gi011 = this.perm[X + this.perm[Y + 1 + this.perm[Z + 1]]] % 12;
+        var gi100 = this.perm[X + 1 + this.perm[Y + this.perm[Z]]] % 12;
+        var gi101 = this.perm[X + 1 + this.perm[Y + this.perm[Z + 1]]] % 12;
+        var gi110 = this.perm[X + 1 + this.perm[Y + 1 + this.perm[Z]]] % 12;
+        var gi111 = this.perm[X + 1 + this.perm[Y + 1 + this.perm[Z + 1]]] % 12;
+        // The gradients of each corner are now: 
+        // g000 = grad3[gi000]; 
+        // g001 = grad3[gi001]; 
+        // g010 = grad3[gi010]; 
+        // g011 = grad3[gi011]; 
+        // g100 = grad3[gi100]; 
+        // g101 = grad3[gi101]; 
+        // g110 = grad3[gi110]; 
+        // g111 = grad3[gi111]; 
+        // Calculate noise contributions from each of the eight corners 
+        var n000 = this.dot(this.grad3[gi000], x, y, z);
+        var n100 = this.dot(this.grad3[gi100], x - 1, y, z);
+        var n010 = this.dot(this.grad3[gi010], x, y - 1, z);
+        var n110 = this.dot(this.grad3[gi110], x - 1, y - 1, z);
+        var n001 = this.dot(this.grad3[gi001], x, y, z - 1);
+        var n101 = this.dot(this.grad3[gi101], x - 1, y, z - 1);
+        var n011 = this.dot(this.grad3[gi011], x, y - 1, z - 1);
+        var n111 = this.dot(this.grad3[gi111], x - 1, y - 1, z - 1);
+        // Compute the fade curve value for each of x, y, z 
+        var u = this.fade(x);
+        var v = this.fade(y);
+        var w = this.fade(z);
+        // Interpolate along x the contributions from each of the corners 
+        var nx00 = this.mix(n000, n100, u);
+        var nx01 = this.mix(n001, n101, u);
+        var nx10 = this.mix(n010, n110, u);
+        var nx11 = this.mix(n011, n111, u);
+        // Interpolate the four results along y 
+        var nxy0 = this.mix(nx00, nx10, v);
+        var nxy1 = this.mix(nx01, nx11, v);
+        // Interpolate the two last results along z 
+        var nxyz = this.mix(nxy0, nxy1, w);
+        return nxyz;
+    };
+
+    var scale = function (num, in_min, in_max, out_min, out_max) {
+        return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    };
+    var MyCircle = /** @class */ (function () {
+        // canvasOffset: number;
+        function MyCircle(ctx, x, y, r, color) {
+            this.x = x;
+            this.y = y;
+            this.maxR = r;
+            this.perlinSeed = 1;
+            this.ctx = ctx;
+            this.perlinNoise = new ClassicalNoise({ random: function () { return Math.random(); } });
+            this.color = color;
+            this.stretch = Math.random() * 10 + 5;
+        }
+        MyCircle.prototype.updateSeed = function (addValue) {
+            // const {perlinSeed} = this
+            this.perlinSeed = this.perlinSeed + Math.random();
+            // const val = this.perlinSeed
+            // this.perlinNoise = new  perlin({random:()=>Math.sin(val)})
+        };
+        MyCircle.prototype.distort = function () {
+        };
+        MyCircle.prototype.draw = function (mouseX, mouseY) {
+            var _a = this, x = _a.x, y = _a.y, maxR = _a.maxR, perlinSeed = _a.perlinSeed, ctx = _a.ctx;
+            // const p = perlin(perlinSeed)
+            // console.log('perlin seed', perlinSeed)
+            // console.log()
+            // console.log(perlinSeed)
+            // ctx.beginPath();
+            // ctx.moveTo (60, 10);
+            // ctx.lineTo (60, 110);
+            // ctx.bezierCurveTo (0, 110, 0, 10, 60, 10);
+            // ctx.fill();
+            // for (let i = 0; i < Math.PI)
+            var cos = Math.cos, sin = Math.sin, PI = Math.PI;
+            ctx.fillStyle = this.color;
+            var scope = 150;
+            var radius;
+            // if(!inscope) {
+            //     radius = 0 
+            // } else {
+            var distanceFromMouse = Math.abs(Math.sqrt(Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2)));
+            console.log({ distanceFromMouse: distanceFromMouse });
+            radius = scale(distanceFromMouse, scope, 0, maxR, 0);
+            // }
+            // const mousePos = 
+            var i = 0;
+            // let movingmaxR = r
+            ctx.beginPath();
+            // ctx.moveTo(x, y);
+            while (i < PI * 2) {
+                // console.log(randn_bm())
+                // // const h = noise.dot()
+                var thisX = cos(i) * radius + x;
+                var thisY = sin(i) * radius + y;
+                var thisN = this.perlinNoise.noise(thisX, thisY, this.perlinSeed);
+                // console.log(thisN)
+                // movingR += randn_bm()
+                ctx.lineTo(thisX + thisN * this.stretch, thisY + thisN * this.stretch);
+                i += 0.1;
+            }
+            ctx.fill();
+        };
+        return MyCircle;
+    }());
+
+    var allBlobs = [];
+    var canvasHeight = window.innerHeight;
+    var canvasWidth = window.innerWidth * 4;
+    var blobMargin = 100;
+    var blobSize = 60;
+    var canvasOffsetX = 0;
+    var canvasOffsetY = 0;
+    var background;
+    var createCanvas$1 = function () {
+        var canvas = document.getElementById('scrolling-blob-canvas');
+        canvasOffsetY = canvas.getBoundingClientRect().top;
+        canvasOffsetX = canvas.getBoundingClientRect().left;
+        console.log("CANVAS IS");
+        console.log(canvas);
+        if (!canvas)
+            return;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        var ctx = canvas.getContext('2d');
+        background = {
+            ctx: ctx,
+            draw: function () {
+                var ctx = this.ctx;
+                ctx.fillStyle = 'white'; // set the color to 'red'
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                // ctx.fillStyle = 'blue';   
+                ctx.fill();
+            }
+        };
+        // mainBlob =  new MyBlob (ctx, 130,130, 50, getRandomColor())
+        for (var y = 0; y < canvasWidth / (blobSize / blobMargin); y += blobSize + blobMargin) {
+            for (var x = 0; x < canvasHeight / (blobSize / blobMargin); x += blobSize + blobMargin) {
+                allBlobs.push(new MyCircle(ctx, x + blobSize + blobMargin, y + blobSize + blobMargin, blobSize, getRandomColor()));
+            }
+        }
+        // window.setInterval(function (){
+        // console.log('hey')
+        draw();
+        // }, 200)
+        // ctx.fill()
+    };
+    window.onmousemove = function (e) {
+        var pageX = e.pageX, pageY = e.pageY;
+        background.draw();
+        allBlobs.forEach(function (b) {
+            //     // const flip = Math.random() <0.01
+            //     // if(flip)
+            //         b.updateSeed(0.01)
+            b.draw(pageX - canvasOffsetX, pageY - canvasOffsetY);
+        });
+    };
+    function draw(ctx) {
+        // ctx.fillStyle = 'green';
+        // ctx.fill('evenodd')
+        background.draw();
+        // mainBlob.draw()
+        allBlobs.forEach(function (b) {
+            b.draw();
+        });
+    }
+
     docReady(function () {
         setupCubes();
+        populateShapes();
+        createCanvas();
+        createCanvas$1();
     });
 
 })));
