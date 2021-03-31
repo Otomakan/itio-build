@@ -1331,6 +1331,9 @@
     var getRandomColor = function () {
         return colorsHex[Math.floor(Math.random() * colorsHex.length)];
     };
+    var getRandomColorMinusBlack = function () {
+        return colorsHex[Math.floor(Math.random() * (colorsHex.length - 1))];
+    };
 
     var lastScrollTop = 0;
     var scrollingAnimation = function (cubes) {
@@ -1400,7 +1403,7 @@
         return getPercentageOffset() < 50;
     };
     var cubesChanging = function (cubes) {
-        var texts = [['Idea', 'Product'], ['Input', 'Output'], ['Info', 'Tech'], ['Data', 'Action'], ['Art', 'Code'], ['Fake', 'News']];
+        var texts = [['Input', 'Output'], ['Idea', 'Product'], ['Info', 'Tech'], ['Data', 'Action'], ['Art', 'Code'], ['Fake', 'News']];
         for (var i = 0; i < cubes.length; i++) {
             var cube = cubes[i];
             var sections = document.getElementsByClassName('section');
@@ -1534,6 +1537,7 @@
 
     var setupCubes = function () {
         var cubes = document.getElementsByClassName('cube');
+        var cubeContainers = document.getElementsByClassName('cube-container');
         var _loop_1 = function (i) {
             var cube = cubes[i];
             shuffleBox(cube);
@@ -1544,6 +1548,13 @@
         for (var i = 0; i < cubes.length; i++) {
             _loop_1(i);
         }
+        // for(let i = 0; i < cubeContainers.length; i++) {
+        //     const cubeContainer = cubeContainers[i] as HTMLElement
+        //     shuffleBox(cubeContainer)
+        //     cubeContainer.addEventListener('click',()=>{
+        //         shuffleBox(cubeContainer)
+        //     })
+        // }
         scrollingAnimation(cubes);
     };
     var cubeBaseSideTranslate$1 = deepFreeze$1({
@@ -1611,7 +1622,6 @@
                 // easing: 'linear',
                 complete: function (anim) {
                     window.addEventListener('scroll', function recover() {
-                        console.log("WOOOW");
                         anime(__assign(__assign({ targets: side }, cubeBaseSideTranslate$1[position]), { 
                             // backgroundColor: '#FFF',
                             duration: 500 }));
@@ -1864,7 +1874,7 @@
                 // console.log(thisN)
                 // movingR += randn_bm()
                 ctx.lineTo(thisX + thisN * this.stretch, thisY + thisN * this.stretch);
-                i += 0.1;
+                i += 0.01;
             }
             ctx.fill();
         };
@@ -1881,12 +1891,10 @@
     var background;
     var createCanvas$1 = function () {
         var canvas = document.getElementById('scrolling-blob-canvas');
-        canvasOffsetY = canvas.getBoundingClientRect().top;
-        canvasOffsetX = canvas.getBoundingClientRect().left;
-        console.log("CANVAS IS");
-        console.log(canvas);
         if (!canvas)
             return;
+        canvasOffsetY = canvas.getBoundingClientRect().top;
+        canvasOffsetX = canvas.getBoundingClientRect().left;
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
         var ctx = canvas.getContext('2d');
@@ -1903,40 +1911,42 @@
         // mainBlob =  new MyBlob (ctx, 130,130, 50, getRandomColor())
         for (var y = 0; y < canvasWidth / (blobSize / blobMargin); y += blobSize + blobMargin) {
             for (var x = 0; x < canvasHeight / (blobSize / blobMargin); x += blobSize + blobMargin) {
-                allBlobs.push(new MyCircle(ctx, x + blobSize + blobMargin, y + blobSize + blobMargin, blobSize, getRandomColor()));
+                allBlobs.push(new MyCircle(ctx, x + blobSize + blobMargin, y + blobSize + blobMargin, blobSize, 'rgba(255, 255, 255, 0.4)', getRandomColorMinusBlack()));
             }
         }
-        // window.setInterval(function (){
-        // console.log('hey')
         draw();
-        // }, 200)
-        // ctx.fill()
-    };
-    window.onmousemove = function (e) {
-        var pageX = e.pageX, pageY = e.pageY;
-        background.draw();
-        allBlobs.forEach(function (b) {
-            //     // const flip = Math.random() <0.01
-            //     // if(flip)
-            //         b.updateSeed(0.01)
-            b.draw(pageX - canvasOffsetX, pageY - canvasOffsetY);
-        });
+        window.onmousemove = function (e) {
+            var pageX = e.pageX, pageY = e.pageY;
+            background.draw();
+            allBlobs.forEach(function (b) {
+                //     // const flip = Math.random() <0.01
+                //     // if(flip)
+                //         b.updateSeed(0.01)
+                b.draw(pageX - canvasOffsetX, pageY - canvasOffsetY);
+            });
+        };
     };
     function draw(ctx) {
         // ctx.fillStyle = 'green';
         // ctx.fill('evenodd')
-        background.draw();
+        console.log('drawing once');
+        background.draw(0 - canvasOffsetX, 0 - canvasOffsetY);
         // mainBlob.draw()
         allBlobs.forEach(function (b) {
             b.draw();
         });
     }
 
+    // import wavyLines from './layout/wavyLines'
+    // import dataSeparator from './layout/dataSeparator'
     docReady(function () {
         setupCubes();
         populateShapes();
         createCanvas();
         createCanvas$1();
+        wavyLines();
+        //    dataSeparator()
+        // slashingCubes()
     });
 
 })));
