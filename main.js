@@ -1937,16 +1937,22 @@
         });
     }
 
-    // import wavyLines from './layout/wavyLines'
-    // import dataSeparator from './layout/dataSeparator'
     docReady(function () {
         setupCubes();
         populateShapes();
         createCanvas();
         createCanvas$1();
-        wavyLines();
-        //    dataSeparator()
-        // slashingCubes()
+    });
+
+    docReady(function () {
+        // anime({
+        //     targets: 'h1',
+        //     // translateX: 250,
+        //     rotate: '1turn',
+        //     backgroundColor: '#FFF',
+        //     duration: 5800
+        //   });
+        // home()
     });
 
 })));
